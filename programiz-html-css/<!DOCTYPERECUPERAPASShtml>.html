@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer Contraseña</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 32px;
+            font-weight: 600;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #424344;
+            background-color: #fff;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #4f5051;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 24px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .alert {
+            display: none;
+            padding: 14px 24px;
+            background-color: #2a2b2b;
+            border: none;
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            margin: 10px auto;
+            width: fit-content;
+            min-width: 150px;
+            max-width: 300px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .return-btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .return-btn {
+            padding: 14px 24px;
+            background-color: #2a2b2b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            width: fit-content;
+            min-width: 150px;
+            max-width: 300px;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .return-btn:hover {
+            background-color: #1f1f1f;
+            box-shadow: 0 4px 10px rgba(42, 43, 43, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Restablecer Contraseña</h1>
+        <form id="recovery-form">
+            <label for="phone">Número de Teléfono ✓</label>
+            <input type="tel" id="phone" placeholder="Ingresa tu número de teléfono" required>
+            <button type="button" id="send-code-btn">Enviar Código</button>
+
+            <div id="code-section" style="display: none;">
+                <label for="code">Código de Verificación ✓</label>
+                <input type="text" id="code" placeholder="Ingresa el código recibido por SMS" required>
+                <button type="button" id="verify-code-btn">Verificar Código</button>
+            </div>
+
+            <div id="password-section" style="display: none;">
+                <label for="password">Nueva Contraseña ✓</label>
+                <input type="password" id="password" placeholder="Ingresa tu nueva contraseña" required>
+                <button type="button" id="change-password-btn">Cambiar Contraseña</button>
+            </div>
+        </form>
+
+        <div class="alert" id="success-message"> Código enviado correctamente.</div>
+        <div class="alert" id="verify-message"> Código verificado correctamente.</div>
+        <div class="alert" id="password-changed-message"> Contraseña cambiada correctamente.</div>
+
+        <div class="return-btn-container">
+            <a href="index.html" class="return-btn" id="return-btn">Volver a Inicio</a>
+        </div>
+    </div>
+
+    <script>
+        const sendCodeBtn = document.getElementById('send-code-btn');
+        const verifyCodeBtn = document.getElementById('verify-code-btn');
+        const changePasswordBtn = document.getElementById('change-password-btn');
+        const phoneInput = document.getElementById('phone');
+        const codeInput = document.getElementById('code');
+        const passwordInput = document.getElementById('password');
+        const successMessage = document.getElementById('success-message');
+        const verifyMessage = document.getElementById('verify-message');
+        const passwordChangedMessage = document.getElementById('password-changed-message');
+        const returnBtn = document.getElementById('return-btn');
+
+        // Mostrar el campo de código después de enviar el número
+        sendCodeBtn.addEventListener('click', function () {
+            if (phoneInput.value) {
+                successMessage.style.display = 'block';
+                document.getElementById('code-section').style.display = 'block';
+                sendCodeBtn.style.display = 'none';
+                phoneInput.style.display = 'none';
+            } else {
+                alert('Por favor, ingresa un número de teléfono válido.');
+            }
+        });
+
+        // Mostrar el campo de contraseña después de verificar el código
+        verifyCodeBtn.addEventListener('click', function () {
+            if (codeInput.value) {
+                verifyMessage.style.display = 'block';
+                document.getElementById('password-section').style.display = 'block';
+                verifyCodeBtn.style.display = 'none';
+                codeInput.style.display = 'none';
+            } else {
+                alert('Por favor, ingresa el código de verificación.');
+            }
+        });
+
+        // Mostrar mensaje final y botón de regreso después de cambiar la contraseña
+        changePasswordBtn.addEventListener('click', function () {
+            if (passwordInput.value) {
+                passwordChangedMessage.style.display = 'block';
+                returnBtn.style.display = 'inline-block';
+                changePasswordBtn.style.display = 'none';
+                passwordInput.style.display = 'none';
+            } else {
+                alert('Por favor, ingresa una nueva contraseña.');
+            }
+        });
+    </script>
+</body>
+</html>
